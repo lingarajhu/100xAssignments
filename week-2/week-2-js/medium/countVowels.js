@@ -5,8 +5,14 @@
   Once you've implemented the logic, test your code by running
 */
 
-function countVowels(str) {
-    // Your code here
+function countVowels(str = "") {
+  // Your code here
+  const vow = "aeiouAEIOU";
+  let c = 0;
+  for (let i = 0; i < str.length; i++) {
+    if (vow.includes(str[i])) c++;
+  }
+  return c;
 }
 
 module.exports = countVowels;

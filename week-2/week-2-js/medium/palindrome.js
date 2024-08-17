@@ -3,8 +3,22 @@
   Note: the input string is case-insensitive which means 'Nan' is a palindrom as 'N' and 'n' are considered case-insensitive.
 */
 
-function isPalindrome(str) {
-  return true;
+function isPalindrome(str = "") {
+  const lowercaseStr = str.toLowerCase();
+  const filtredStr = lowercaseStr
+    .split("")
+    .filter(
+      (char) =>
+        char !== "!" &&
+        char !== "?" &&
+        char !== "*" &&
+        char !== "." &&
+        char !== " " &&
+        char !== ","
+    )
+    .join("");
+  const reverseStr = filtredStr.split("").reverse().join("");
+  return filtredStr === reverseStr;
 }
 
 module.exports = isPalindrome;
