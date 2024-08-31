@@ -21,8 +21,8 @@ app.use(express.json());
 // list the all the todos
 app.get("/todos", (req, res) => {
   const todos = loadTodos();
-  if (todos.length === 0) {
-    return res.status(200).json({
+  if (!todos) {
+    return res.status(204).json({
       message: "There is no todo registred",
     });
   }
