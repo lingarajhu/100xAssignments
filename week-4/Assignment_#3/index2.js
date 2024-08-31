@@ -22,7 +22,7 @@ app.use(express.json());
 app.get("/todos", (req, res) => {
   const todos = loadTodos();
   if (todos.length === 0) {
-    res.status(204).json({
+    return res.status(411).json({
       message: "There is no todo registred",
     });
   }
@@ -33,13 +33,18 @@ app.get("/todos", (req, res) => {
 app.get("/todos/:id", (req, res) => {
   const id = parseInt(req.params.id, 10);
   if (isNaN(id)) {
-    return res.send(400).json({ message: "Invalid todo Id" });
+    return res.status(400).json({ message: "Invalid todo Id" });
   }
   const todos = loadTodos();
   if (!todos) {
-    return res.send(204).json({ message: "Todo is empty" });
+    return res.status(204).json({ message: "Todo is empty" });
   }
   const todo = todos.find((todo) => todo.id === id);
+  if (!todo) {
+    return res
+      .status(411)
+      .json({ message: "Todo not found, Id must be invalid" });
+  }
   res.json(todo);
 });
 
