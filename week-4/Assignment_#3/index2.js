@@ -22,7 +22,7 @@ app.use(express.json());
 app.get("/todos", (req, res) => {
   const todos = loadTodos();
   if (todos.length === 0) {
-    return res.status(411).json({
+    return res.status(200).json({
       message: "There is no todo registred",
     });
   }
@@ -109,7 +109,7 @@ app.delete("/todos/:id", (req, res) => {
   const todos = loadTodos();
   const todo = todos.find((todo) => todo.id === id);
   if (!todo) {
-    return res.status(404).json({ error: "Todo is not found" });
+    return res.status(411).json({ error: "Todo is not found" });
   }
   const newTodos = todos.filter((todo) => todo.id !== id);
   saveTodos(newTodos);
